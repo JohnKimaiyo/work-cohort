@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #363232;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .filters input, .filters select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .job-list {
+            list-style: none;
+            padding: 0;
+        }
+        .job-item {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            background-color: #fefefe;
+        }
+        .job-item h3 {
+            margin: 0 0 10px;
+        }
+        .job-item p {
+            margin: 5px 0;
+        }
+        .job-item a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .job-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Job Search Filter</h1>
+        <div class="filters">
+            <input type="text" id="searchTitle" placeholder="Search by job title...">
+            <input type="text" id="searchLocation" placeholder="Search by location...">
+            <select id="searchType">
+                <option value="">Filter by type</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Remote">Remote</option>
+            </select>
+        </div>
+        <ul class="job-list" id="jobList">
+            <!-- Job items will be rendered here -->
+        </ul>
+    </div>
+
+    <script>
+        const jobs = [
+            { title: "Date Engineer", location: "Nairobi", type: "Full-time", url: "https://company1.com/software-engineer" },
+            { title: "Data Analyst", location: "Mombasa", type: "Part-time", url: "https://company2.com/data-analyst" },
+            { title: "Project Manager", location: "Nairobi", type: "Remote", url: "https://company3.com/project-manager" },
+            { title: "Digital Marketing", location: "Kisumu", type: "Full-time", url: "https://company4.com/marketing-specialist" },
+            { title: "UX Designer", location: "Nairobi", type: "Part-time", url: "https://company5.com/ux-designer" },
+            { title: "Cyber secuity ", location: "Remote", type: "Remote", url: "https://company6.com/customer-support" },
+            { title: "Front End Developer ", location: "Remote", type: "Remote", url: "https://company6.com/customer-support" },
+            { title: "Back End Developer", location: "Remote", type: "Remote", url: "https://company6.com/customer-support" },
+            { title: "Full Stack Developer", location: "Remote", type: "Remote", url: "https://company6.com/customer-support" },
+            { title: "Machine Learning Engineer", location: "Remote", type: "Remote", url: "https://company6.com/customer-support" },
+        ];
+
+        const jobList = document.getElementById("jobList");
+        const searchTitle = document.getElementById("searchTitle");
+        const searchLocation = document.getElementById("searchLocation");
+        const searchType = document.getElementById("searchType");
+
+        function renderJobs(filteredJobs) {
+            jobList.innerHTML = "";
+            filteredJobs.forEach(job => {
+                const jobItem = document.createElement("li");
+                jobItem.className = "job-item";
+                jobItem.innerHTML = `
+                    <h3>${job.title}</h3>
+                    <p><strong>Location:</strong> ${job.location}</p>
+                    <p><strong>Type:</strong> ${job.type}</p>
+                    <p><a href="${job.url}" target="_blank">View Job Posting</a></p>
+                `;
+                jobList.appendChild(jobItem);
+            });
+        }
+
+        function filterJobs() {
+            const title = searchTitle.value.toLowerCase();
+            const location = searchLocation.value.toLowerCase();
+            const type = searchType.value;
+
+            const filteredJobs = jobs.filter(job => {
+                return (
+                    (job.title.toLowerCase().includes(title)) &&
+                    (job.location.toLowerCase().includes(location)) &&
+                    (type === "" || job.type === type)
+                );
+            });
+
+            renderJobs(filteredJobs);
+        }
+
+        searchTitle.addEventListener("input", filterJobs);
+        searchLocation.addEventListener("input", filterJobs);
+        searchType.addEventListener("change", filterJobs);
+
+        // Initial render
+        renderJobs(jobs);
+    </script>
+</body>
+</html>
