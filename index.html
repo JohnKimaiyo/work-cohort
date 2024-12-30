@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Search Filter</title>
     <style>
+        h1{
+            font-family: Arial, sans-serif;
+           text-align: center;
+            background-color: #ab8989;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #363232;
+            background-color: #7e4343;
         }
+
         .container {
             max-width: 800px;
             margin: 20px auto;
@@ -19,21 +26,26 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
+
         .filters {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
         }
-        .filters input, .filters select {
+
+        .filters input,
+        .filters select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+
         .job-list {
             list-style: none;
             padding: 0;
         }
+
         .job-item {
             padding: 15px;
             border: 1px solid #ddd;
@@ -41,24 +53,34 @@
             margin-bottom: 10px;
             background-color: #fefefe;
         }
+
         .job-item h3 {
             margin: 0 0 10px;
         }
+
         .job-item p {
             margin: 5px 0;
         }
+
         .job-item a {
             color: #007BFF;
             text-decoration: none;
         }
+
         .job-item a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
+    <header>
+        <h1>WorkCohort</h1>
+    </header>
+
+
     <div class="container">
-        <h1>Job Search Filter</h1>
+        <h2>Job Search Filter</h1>
         <div class="filters">
             <input type="text" id="searchTitle" placeholder="Search by job title...">
             <input type="text" id="searchLocation" placeholder="Search by location...">
@@ -76,7 +98,7 @@
 
     <script>
         const jobs = [
-            { title: "Remote Senior Full-Stack Engineer", location: "Brazil", type: "Full-time", salary:"$ 3,500 per month", url: "https://apply.workable.com/joingenius/j/AD7B6ABBC9/" },
+            { title: "Remote Senior Full-Stack Engineer", location: "Brazil", type: "Full-time", salary: "$ 3,500 per month", url: ":" },
             { title: "Data Analyst", location: "Mombasa", type: "Part-time", url: "https://company2.com/data-analyst" },
             { title: "Project Manager", location: "Nairobi", type: "Remote", url: "https://company3.com/project-manager" },
             { title: "Digital Marketing", location: "Kisumu", type: "Full-time", url: "https://company4.com/marketing-specialist" },
@@ -102,6 +124,7 @@
                     <h3>${job.title}</h3>
                     <p><strong>Location:</strong> ${job.location}</p>
                     <p><strong>Type:</strong> ${job.type}</p>
+                    <p><strong>Salary:</strong> ${job.salary}</p>
                     <p><a href="${job.url}" target="_blank">View Job Posting</a></p>
                 `;
                 jobList.appendChild(jobItem);
@@ -132,4 +155,5 @@
         renderJobs(jobs);
     </script>
 </body>
+
 </html>
